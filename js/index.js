@@ -1,48 +1,109 @@
-var url = 'http://api.tianapi.com/';
-var type = 'generalnews';
-var num = 10;
+
+var type = 'top';
 //默认第一页
 var page = 1;
-//API密钥
-var key = '4d2fd5e9e28ec8770fef37563718523b';
-var lis = document.querySelectorAll('.content ul');
-/*
-*  <li>
-                      <a href="#">
-                          <div class="info">
-                              <p>加外长称逮捕孟晚舟“正确”，外交部：加方执意坚持错误立场</p>
-                              <div class="root-sec">
-                                  <span class="root">澎湃新闻</span>
-                                  <span class="time">4小时前</span>
-                              </div>
-                          </div>
-                          <div class="image">
-                               <img src="//inews.gtimg.com/newsapp_ls/0/9678638275_294195/0">
-                          </div>
-                      </a>
-                  </li>
-* */
+//用来填充新闻内容
+var lis = document.querySelector('.content>ul');
+var pre = document.querySelector('.fresh .pre');
+var next = document.querySelector('.fresh .next');
+var tabs = document.getElementById('tabs');
+console.log("lis:"+lis);
+
+function getScroll()
+{
+    var top, left, width, height;
+
+    if (document.documentElement && document.documentElement.scrollTop) {
+        top = document.documentElement.scrollTop;
+        left = document.documentElement.scrollLeft;
+        width = document.documentElement.scrollWidth;
+        height = document.documentElement.scrollHeight;
+    } else if (document.body) {
+        top = document.body.scrollTop;
+        left = document.body.scrollLeft;
+        width = document.body.scrollWidth;
+        height = document.body.scrollHeight;
+    }
+    return { 'top': top, 'left': left, 'width': width, 'height': height };
+}
 
 
-// Mock.mock('http://www.bai.com?key=4d2fd5e9e28ec8770fef37563718523b&num=10&page=1',{
-//     'url':'https://www.biqukan.com/files/article/image/1/1094/1094s.jpg',
-// })
+window.addEventListener('scroll',function(){
+    var scrollTop = getScroll().top;
+    var winWidth;
+    console.log("scrollTop:"+scrollTop);
+    if (window.innerWidth)
+        winWidth = window.innerWidth;
+    else if ((document.body) && (document.body.clientWidth))
+        winWidth = document.body.clientWidth;
+
+    if(scrollTop >= 200) {
+        if (tabs)
+            tabs.className = 'tabs fixed';
+
+        else
+            alert("捕获为空");
+    }
+    else
+        tabs.className='tabs';
+})
 
 
-window.onload = function(){
-    url += type;
-    alert(url);
-    $.ajax({
-        url:'http://localhost:8080/generalnews',
+function getNews(page){
+    /*调用封装的ajax*/
+    ajax({
+        url:'http://114.116.123.150:15000/getjuhenews',
         type:'GET',
         data:{
-            key:key,
-            num:10,
-            page:page
+            page:page,
+            type:type
         },
         dataType:'json',
         success:function(e){
             console.log(e);
+            lis.innerHTML = '';
+            for(var i = 0;i < e['result']['data'].length;++i) {
+                //创建一个新li
+                console.log("ctime:"+e['result']['data'][i].date);
+                var li = document.createElement('li');
+                //"'
+                li.innerHTML = '<a href="'+e['result']['data'][i].url+'">'+'<div class="info"><p>'+e['result']['data'][i].title+'</p>' +
+                    '<div class="root-sec"> <span class="root">'+e['result']['data'][i].author_name+'</span> <span class="time">'+e['result']['data'][i].date+'</span>'+
+                    '</div></div><div class="image"><img src="'+e['result']['data'][i].thumbnail_pic_s+'">'+'</div></a>';
+                lis.append(li);
+            }
         }
     })
 }
+
+
+window.onload = function(){
+    getNews(page);
+    alert("主要制作了首页，娱乐，国际，体育，视频，登录，注册等页面");
+}
+
+//点击上一页
+pre.addEventListener('click',function(){
+    page--;
+    if(page < 1)
+    {
+        page = 1;
+        pre.disabled = true;
+        pre.style.backgroundColor = '#ccc';
+    }
+    else
+        getNews(page);
+})
+
+
+next.addEventListener('click',function(){
+    if(page == 1){
+        pre.disabled = false;
+        pre.style.backgroundColor = '#c00';
+    }
+    page++;
+    getNews(page);
+})
+
+
+

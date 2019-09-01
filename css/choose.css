@@ -1,0 +1,84 @@
+
+.login_bg{
+    width:600px;
+    margin:0 auto;
+    text-align: center;
+    opacity: 0.9;
+    padding-bottom:0.1rem;
+    position:relative;
+}
+
+@media screen and (max-width:600px){
+    .login_bg {
+        width: 100%;
+        min-height: 100%;
+        text-align: center;
+        opacity: 0.9;
+        position:relative;
+    }
+}
+
+#logo{
+    margin: 9% auto;
+    width: 30.25%;
+}
+img{
+    width: 100%;
+}
+
+
+.login_btn{
+    width: 100%;
+    display: block;
+    padding:3% 0 ;
+    background: #ffffff;
+    border: 0;
+    font-size: 1em;
+    font-family: "Microsoft YaHei";
+    color:#374782;
+    box-shadow: #8f9bad 0px 0px 20px;
+    text-align: center;
+}
+
+.other_login{
+    width: 80%;
+    height: 30px;
+    margin:0 auto;
+    display:block;
+}
+
+.other_login .other,.other_login span{
+    display: inline-block;
+    vertical-align: middle;
+}
+.other_login .other{
+    width: 28%;
+    height: 8px;
+    border-bottom:1px solid #2f2c59;
+}
+.other_login span{
+    width:40%;
+}
+
+.other_choose{
+    width: 74%;
+    margin: 30px 13%;
+}
+
+.login_bg .other_choose a{
+    display: block;
+    float: left;
+    border: 2px solid #505887;
+    border-radius: 50%;
+    position: absolute;
+}
+.other_choose a:nth-child(2) {
+    left:42%;
+}
+.other_choose a:nth-child(3) {
+    left:80%;
+}
+.other_choose a img{
+    width: 60%;
+    padding: 14% 0;
+}

@@ -1,6 +1,7 @@
-img{border:none;display:block;}
-html{font-size:204.8px;}
 
+img{border:none;display:block;}
+
+html{font-size:204.8px;}
 .mainPage{
     width:750px;
     height:100%;
@@ -8,51 +9,22 @@ html{font-size:204.8px;}
     position:relative;
 }
 
-
-/*
-主要是为了实现自适应端的顶部固定栏效果
-*/
-.mainPage .header .tabs{
-    display:flex;
-    top: 0;
-    margin:0 auto;
-    width: 750px;
-
-}
-
-
-/*
-在小于750px，通过视口进行自适应设计
-*/
 @media screen and (max-width:750px){
-     html{
-         /*给其27vw*/
-         font-size:27vw;
-     }
+    html{
+        /*给其27vw*/
+        font-size:27vw;
+    }
     .mainPage{
         min-width:320px;
         width:100%;
         box-sizing: border-box;
     }
-
-    .mainPage .header .tabs{
-        display:flex;
-        width: 100%;
-    }
-}
-
-.fixed{
-    background: rgb(83, 123, 255);
-    position:fixed;
-    height:0.4rem;
-    top:0;
 }
 
 .mainPage .header{
     width:100%;
-    height: 1.5rem;
+    height: 1rem;
     background: linear-gradient(176deg, rgb(76, 126, 255) 0%, rgb(100, 174, 252) 100%) 0% 0% / 100%;
-
 }
 
 /*首页的内边距*/
@@ -94,6 +66,10 @@ html{font-size:204.8px;}
     width:100%;
 }
 
+.mainPage .header .tabs{
+    width:100%;
+    display:flex;
+}
 
 .mainPage .header .tabs li{
     font-size: 0.18rem;
@@ -123,87 +99,107 @@ html{font-size:204.8px;}
     width:100%;
 }
 
-.container .nav{
-    height: 0.95rem;
-    width: 3.45rem;
-    /*box-shadow: rgba(0, 69, 189, 0.1) 0px 1px 8px 0px;*/
-    box-sizing: border-box;
-    background: rgb(255, 255, 255);
-    border-radius: 0.06rem;
-    padding: 0.12rem 0px 0px 0.045rem;
-    /*用于将导航栏定位到特定处*/
-    position:absolute;
-    top:0.9rem;
-    left:0.1rem;
-
-}
-
-.container .nav li{
-    font-size: 0.15rem;
-    width: 0.56rem;
-    height: 0.17rem;
-    color: rgb(81, 87, 97);
-    line-height: 0.17rem;
-    float: left;
-    margin-bottom: 0.1rem;
-    text-align: center;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.container .nav li a{color: rgb(81, 87, 97);}
-
-.container .zhiding {
-    width: 100%;
-    margin-top: 0.4rem;
-    padding: 0.12rem 0.12rem 0px 0.12rem;
-    box-sizing: border-box;
-}
-
-.container .zhiding>ul>li{
-}
-
-.container .zhiding>ul>li{
-    border-bottom:1px solid #ccc;
-    box-sizing: border-box;
-    padding-top:.1rem;
-    padding-bottom:.1rem;
-}
-
-.container .zhiding>ul>li  p{
-    font-size: 0.17rem;
-    line-height: 0.24rem;
-    font-weight: 400;
-    color: rgb(34, 34, 34);
-    overflow: hidden;
-    word-break: break-all;
-}
-
-.container .zhiding>ul>li p span{
-    display: inline-block;
-    vertical-align: top;
-    background-color: rgb(238, 84, 73);
-    font-size: 0.12rem;
-    margin-right:0.055rem;
-    margin-top: 0.025rem;
-    height: 0.17rem;
-    line-height: 0.18rem;
-    color: rgb(255, 255, 255);
-    border-radius: 0.02rem;
-    padding: 0px 0.04rem;
-}
-
-
 .container .content{
     width:100%;
     margin-top:10px;
     padding: 0.12rem 0.12rem 0px 0.12rem;
     box-sizing: border-box;
+    box-shadow: 0 0 1px #ccc;
 }
 
 .container .content li{
     width:100%;
-    padding-top:0.08rem;
+    position:relative;
+    margin-top:0.1rem;
+    border-bottom:1px solid #ccc;
+
+}
+
+.container .content li .img{
+
+}
+.container .content li .img img{
+    display: block;
+    width: 100%;
+    border-radius:0.05rem;
+    background-color: rgb(255, 255, 255);
+}
+
+.container .content li .dv-title{
+    position:absolute;
+    left:0.1rem;
+    top:0.05rem;
+}
+.container .content li .dv-title>p{
+    font-size: 0.17rem;
+    line-height: 0.24rem;
+    font-weight: 400;
+    color: #fff;
+    word-break: break-all;
+    overflow: hidden;
+}
+.container .content li .play{
+    width:0.3rem;
+    height:0.3rem;
+    position:absolute;
+    left:47%;
+    top:1.2rem;
+    z-index:2;
+}
+.container .content li .play>img{
+    display:block;
+}
+.container .content li .video-info{
+    position:absolute;
+    right: 0.09rem;
+    bottom: 0.55rem;
+    font-size: 0.12rem;
+    color: rgb(255, 255, 255);
+    height: 0.18rem;
+    line-height: 0.18rem;
+    background: rgba(0, 0, 0, 0.3) none repeat scroll 0% 0%;
+    padding: 0px 0.1rem;
+    border-radius: 0.09rem;
+}
+.container .content li .video-info>.views{}
+.container .content li .video-info>.date{}
+.container .content li .root{
+    height: 0.24rem;
+    margin-top: 0.09rem;
+    margin-bottom:0.09rem;
+    display:flex;
+}
+
+.container .content li .root a{
+    font-size:0.14rem;
+    text-decoration: none;
+    border:none;
+}
+.container .content li .root a>img{
+    margin-right: 0.06rem;
+    width: 0.24rem;
+    height: 0.24rem;
+    border-radius: 50%;
+}
+.container .content li .root a>span{
+    color:#000;
+    font-size:0.14rem;
+    line-height:0.24rem;
+}
+.container .content li .root .categories{
+    margin-left:0.15rem;
+}
+.container .content li .root .categories>a{
+    font-size:0.12rem;
+    padding: 0px 0.09rem;
+    height: 0.18rem;
+    background: rgb(237, 242, 250) none repeat scroll 0% 0%;
+    border-radius: 0.1rem;
+    color: rgb(130, 140, 155);
+    line-height: 0.18rem;
+    margin-right: 0.09rem;
+    text-align: center;
+    margin-top:0.04rem;
 }
 
 .container .content a{
@@ -211,10 +207,11 @@ html{font-size:204.8px;}
     border-bottom:1px solid #ccc;
 }
 
+
+
 .container .content .info{
     margin-right:0.1rem;
     width: 60%;
-    box-sizing:border-box;
 }
 
 .container .content .info p {
@@ -244,8 +241,7 @@ html{font-size:204.8px;}
 
 
 .container .content .image{
-    box-sizing:border-box;
-    width:40%;
+    flex-grow:1;
     overflow: hidden;
     border-radius: 0.03rem;
     margin-bottom:0.1rem;
@@ -291,4 +287,3 @@ html{font-size:204.8px;}
     border-radius:.2rem;
     cursor:pointer;
 }
-
